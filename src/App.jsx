@@ -1,14 +1,32 @@
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Home from './pages/Home'
+import Browse from './pages/Browse'
+import MovieDetail from './pages/MovieDetail'
+import SearchResults from './pages/SearchResults'
+import Watchlist from './pages/Watchlist'
+import NotFound from './pages/NotFound'
+
 function App() {
   return (
-    <div className="min-h-screen bg-cinema-bg text-white flex flex-col items-center justify-center gap-4">
-      <h1 className="font-display text-6xl tracking-wide text-cinema-gold">
-        CINEMA APP
-      </h1>
-      <p className="text-cinema-muted">Powered by Tailwind v4 design tokens</p>
-      <button className="bg-cinema-red hover:bg-cinema-red-hover transition-colors px-6 py-2 rounded-full font-semibold">
-        Watch Now
-      </button>
-    </div>
+    <BrowserRouter>
+      {/* Temporary nav just to test links  */}
+      <nav className="bg-cinema-surface p-4 flex gap-6 text-cinema-muted">
+        <Link to="/" className="hover:text-cinema-gold transition-colors">Home</Link>
+        <Link to="/browse" className="hover:text-cinema-gold transition-colors">Browse</Link>
+        <Link to="/movie/1" className="hover:text-cinema-gold transition-colors">Movie Detail</Link>
+        <Link to="/search" className="hover:text-cinema-gold transition-colors">Search</Link>
+        <Link to="/watchlist" className="hover:text-cinema-gold transition-colors">Watchlist</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/browse" element={<Browse />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
