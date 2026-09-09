@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Heart, Plus, Star } from 'lucide-react'
+import { useWatchlist } from '../../hooks/useWatchlist'
 
 function MovieCard({ movie }) {
   const posterUrl = movie.poster_path
@@ -10,10 +11,12 @@ function MovieCard({ movie }) {
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'
 
   
-  const isInWatchlist = false
-  const toggleWatchlist = (e) => {
+ const { isInWatchlist, toggleWatchlist } = useWatchlist()
+  const inWatchlist = isInWatchlist(movie.id)
+
+  const handleToggle = (e) => {
     e.preventDefault()
-    console.log('toggle watchlist for', movie.id)
+    toggleWatchlist(movie)
   }
 
   return (
@@ -30,29 +33,30 @@ function MovieCard({ movie }) {
       />
 
       {/* Rating badge  */}
-      <div className="absolute top-2 left-2 bg-black/70 backdrop-blur-sm rounded-md px-2 py-0.5 flex items-center gap-1">
+      <div className="absolute top-2 left-2 z-20 bg-black/70 backdrop-blur-sm rounded-md px-2 py-0.5 flex items-center gap-1">
         <Star size={12} className="text-cinema-gold" fill="currentColor" />
         <span className="text-xs text-white font-medium">{rating}</span>
       </div>
 
       {/* Heart/bookmark */}
       <button
-        onClick={toggleWatchlist}
-        className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm rounded-full p-1.5 hover:bg-cinema-red transition-colors"
-        aria-label="Toggle watchlist"
-      >
-        <Heart size={14} className={isInWatchlist ? 'fill-cinema-red text-cinema-red' : 'text-white'} />
+  onClick={handleToggle}
+  className="absolute top-2 right-2 z-20 bg-black/70 backdrop-blur-sm rounded-full p-1.5 hover:bg-cinema-red transition-colors"
+  aria-label="Toggle watchlist"
+>
+        <Heart size={14} className={inWatchlist ? 'fill-cinema-red text-cinema-red' : 'text-white'} />
       </button>
 
+
       {/* Hover overlay */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-3">
+      <div className="absolute inset-0 z-10 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 flex flex-col justify-end p-3">
         <p className="text-white text-sm font-semibold truncate">{movie.title || movie.name}</p>
         <p className="text-cinema-muted text-xs mb-2">{year}</p>
         <button
-          onClick={toggleWatchlist}
+          onClick={handleToggle}
           className="flex items-center justify-center gap-1 bg-white/90 hover:bg-white text-black text-xs font-semibold rounded-md py-1.5 transition-colors"
         >
-          <Plus size={14} /> Watchlist
+          <Plus size={14} />{inWatchlist ? 'Remove' : 'Watchlist'}
         </button>
       </div>
 

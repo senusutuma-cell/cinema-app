@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, Search, Bookmark, Film } from 'lucide-react'
+import { useWatchlist } from '../../hooks/useWatchlist'
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
  
-  const watchlistCount = 0
+const { watchlist } = useWatchlist()
+const watchlistCount = watchlist.length
 
   const links = [
     { to: '/', label: 'Home' },
