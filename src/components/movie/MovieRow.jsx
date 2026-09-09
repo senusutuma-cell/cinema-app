@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import useMovies from '../../hooks/useMovies'
+import MovieCard from './MovieCard'
+import SkeletonCard from './SkeletonCard'
 
 function MovieRow({ title, endpoint }) {
   const scrollRef = useRef(null)
@@ -39,33 +41,10 @@ function MovieRow({ title, endpoint }) {
         ref={scrollRef}
         className="flex gap-3 overflow-x-auto scroll-smooth px-4 sm:px-6 lg:px-8 pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-none]"
       >
-        {loading &&
-          Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="shrink-0 w-40 sm:w-50 aspect[-2/3] rounded-lg bg-cinema-card animate-pulse"
-            />
-          ))}
+        {loading && Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}
 
-        {!loading &&
-          movies.map((movie) => (
-            <div
-              key={movie.id}
-              className="shrink-0 w-400 sm:w-50 rounded-lg overflow-hidden bg-cinema-card hover:scale-105 transition-transform duration-200 cursor-pointer"
-            >
-              <img
-                src={
-                  movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                    : 'https://placehold.co/500x750/1c1c28/8a8a9a?text=No+Image'
-                }
-                alt={movie.title || movie.name}
-                className="w-full aspect[-2/3] object-cover"
-              />
-              <p className="text-xs text-white p-2 truncate">{movie.title || movie.name}</p>
-            </div>
-          ))}
-      </div>
+        {!loading && movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+        </div>
 
       <button
         onClick={() => scroll('right')}
