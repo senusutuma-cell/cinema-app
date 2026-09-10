@@ -1,10 +1,12 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import TrailerModal from '../components/movie/TrailerModal'
 import { Star, Play, Heart } from 'lucide-react'
 import { useWatchlist } from '../hooks/useWatchlist'
 
 const API_KEY = import.meta.env.VITE_TMDB_KEY
 const BASE_URL = 'https://api.themoviedb.org/3'
+
 
 function MovieDetail() {
   const { id } = useParams()
@@ -15,6 +17,7 @@ function MovieDetail() {
   const [similar, setSimilar] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showTrailer, setShowTrailer] = useState(false)
 
   const { isInWatchlist, toggleWatchlist } = useWatchlist()
 
@@ -138,16 +141,14 @@ function MovieDetail() {
         <h2 className="text-xl font-semibold mb-3">Overview</h2>
         <p className="text-cinema-muted leading-relaxed mb-6">{movie.overview}</p>
 
-        {trailerKey && (
-          <a
-            href={`https://www.youtube.com/watch?v=${trailerKey}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-cinema-red hover:bg-cinema-red-hover transition-colors px-5 py-2.5 rounded-md font-semibold"
-          >
-            <Play size={18} fill="white" /> Watch Trailer
-          </a>
-        )}
+  {trailerKey && (
+  <button
+    onClick={() => setShowTrailer(true)}
+    className="inline-flex items-center gap-2 bg-cinema-red hover:bg-cinema-red-hover transition-colors px-5 py-2.5 rounded-md font-semibold"
+  >
+    <Play size={18} fill="white" /> Watch Trailer
+  </button>
+)}
       </div>
 
       {cast.length > 0 && (
@@ -195,6 +196,9 @@ function MovieDetail() {
                 <p className="text-xs p-2 truncate">{m.title}</p>
               </Link>
             ))}
+            {showTrailer && (
+        <TrailerModal videoKey={trailerKey} onClose={() => setShowTrailer(false)} />
+      )}
           </div>
         </div>
       )}
