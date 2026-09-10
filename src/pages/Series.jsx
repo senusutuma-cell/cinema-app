@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useMovies from '../hooks/useMovies'
+import useInfiniteScroll from '../hooks/useInfiniteScroll'
 import useGenres from '../hooks/useGenres'
 import GenreFilter from '../components/ui/GenreFilter'
 import SortSelect from '../components/ui/SortSelect'
@@ -13,7 +13,10 @@ function Series() {
   const genres = useGenres('tv')
 
   const params = `&sort_by=${sortBy}${selectedGenre ? `&with_genres=${selectedGenre}` : ''}`
-  const { data: series, loading, error } = useMovies('/discover/tv', params)
+  const { items: series, loading, error, sentinelRef, hasMore } = useInfiniteScroll(
+    '/discover/tv',
+    params
+  )
 
   return (
     <div className="min-h-screen bg-cinema-bg text-white px-4 sm:px-6 lg:px-8 py-8">
@@ -28,12 +31,13 @@ function Series() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {loading && Array.from({ length: 15 }).map((_, i) => <SkeletonCard key={i} />)}
-        {!loading && series.map((show) => <MovieCard key={show.id} movie={show} type="tv" />)}
+         {series.map((show) => <MovieCard key={show.id} movie={show} type="tv" />)}
       </div>
 
       {!loading && series.length === 0 && (
         <p className="text-cinema-muted text-center py-20">No series found for this filter.</p>
       )}
+      {hasMore && <div ref={sentinelRef} className="h-4" />}
     </div>
   )
 }

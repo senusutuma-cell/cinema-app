@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useMovies from '../hooks/useMovies'
+import useInfiniteScroll from '../hooks/useInfiniteScroll'
 import useGenres from '../hooks/useGenres'
 import GenreFilter from '../components/ui/GenreFilter'
 import SortSelect from '../components/ui/SortSelect'
@@ -13,7 +13,10 @@ function Browse() {
   const genres = useGenres()
 
   const params = `&sort_by=${sortBy}${selectedGenre ? `&with_genres=${selectedGenre}` : ''}`
-  const { data: movies, loading, error } = useMovies('/discover/movie', params)
+  const { items: movies, loading, error, sentinelRef, hasMore } = useInfiniteScroll(
+    '/discover/movie',
+    params
+  )
 
   return (
     <div className="min-h-screen bg-cinema-bg text-white px-4 sm:px-6 lg:px-8 py-8">
@@ -28,12 +31,13 @@ function Browse() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {loading && Array.from({ length: 15 }).map((_, i) => <SkeletonCard key={i} />)}
-        {!loading && movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+        {movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
       </div>
 
       {!loading && movies.length === 0 && (
         <p className="text-cinema-muted text-center py-20">No movies found for this filter.</p>
       )}
+       {hasMore && <div ref={sentinelRef} className="h-4" />}
     </div>
   )
 }
