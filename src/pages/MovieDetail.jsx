@@ -92,7 +92,7 @@ function MovieDetail() {
           alt={movie.title}
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-cinema-bg via-cinema-bg/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-cinema-bg via-cinema-bg/60 to-transparent" />
 
         <div className="absolute bottom-0 left-0 p-6 sm:p-10 flex gap-6 items-end max-w-5xl">
           <img
@@ -153,9 +153,9 @@ function MovieDetail() {
       {cast.length > 0 && (
         <div className="px-6 sm:px-10 py-6">
           <h2 className="text-xl font-semibold mb-4">Cast</h2>
-          <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [scrollbar-none]">
+          <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
             {cast.map((person) => (
-              <div key={person.id} className="shrink-0 w-28 text-center">
+              <div key={person.id} className="flex-shrink-0 w-28 text-center">
                 <img
                   src={
                     person.profile_path
@@ -176,12 +176,12 @@ function MovieDetail() {
       {similar.length > 0 && (
         <div className="px-6 sm:px-10 py-6">
           <h2 className="text-xl font-semibold mb-4">Similar Movies</h2>
-          <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [scrollbar-none]">
+          <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
             {similar.map((m) => (
               <Link
                 key={m.id}
                 to={`/movie/${m.id}`}
-                className="shrink-0 w-32 sm:w-40 rounded-lg overflow-hidden bg-cinema-card hover:scale-105 transition-transform"
+                className="flex-shrink-0 w-32 sm:w-40 rounded-lg overflow-hidden bg-cinema-card hover:scale-105 transition-transform"
               >
                 <img
                   src={
@@ -190,7 +190,7 @@ function MovieDetail() {
                       : 'https://placehold.co/300x450/1c1c28/8a8a9a?text=No+Image'
                   }
                   alt={m.title}
-                  className="w-full aspect[-2/3] object-cover"
+                  className="w-full aspect-[2/3] object-cover"
                 />
                 <p className="text-xs p-2 truncate">{m.title}</p>
               </Link>
