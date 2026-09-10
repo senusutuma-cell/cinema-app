@@ -1,11 +1,10 @@
-import { createContext,  useState, useEffect } from 'react'
+import { createContext, useState, useEffect } from 'react'
 
 export const WatchlistContext = createContext()
 
 const STORAGE_KEY = 'cinema-app-watchlist'
 
 export function WatchlistProvider({ children }) {
-  
   const [watchlist, setWatchlist] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY)
@@ -15,31 +14,42 @@ export function WatchlistProvider({ children }) {
     }
   })
 
- 
+  const [toastMessage, setToastMessage] = useState('')
+
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(watchlist))
   }, [watchlist])
-  
+
+  useEffect(() => {
+    if (!toastMessage) return
+    const timer = setTimeout(() => setToastMessage(''), 2500)
+    return () => clearTimeout(timer)
+  }, [toastMessage])
+
   const isInWatchlist = (id) => watchlist.some((m) => m.id === id)
 
-   const toggleWatchlist = (movie) => {
-    console.log('toggleWatchlist called with:', movie.title)
+  const toggleWatchlist = (movie) => {
     setWatchlist((prev) => {
-      const updated = prev.some((m) => m.id === movie.id)
+      const alreadyIn = prev.some((m) => m.id === movie.id)
+      setToastMessage(
+        alreadyIn
+          ? `Removed "${movie.title || movie.name}" from watchlist`
+          : `Added "${movie.title || movie.name}" to watchlist`
+      )
+      return alreadyIn
         ? prev.filter((m) => m.id !== movie.id)
         : [...prev, movie]
-      console.log('new watchlist:', updated)
-      return updated
     })
   }
 
-  const removeFromWatchlist = (id) => {
+  const removeFromWatchlist = (id, title) => {
     setWatchlist((prev) => prev.filter((m) => m.id !== id))
+    if (title) setToastMessage(`Removed "${title}" from watchlist`)
   }
 
   return (
     <WatchlistContext.Provider
-      value={{ watchlist, isInWatchlist, toggleWatchlist, removeFromWatchlist }}
+      value={{ watchlist, isInWatchlist, toggleWatchlist, removeFromWatchlist, toastMessage }}
     >
       {children}
     </WatchlistContext.Provider>
