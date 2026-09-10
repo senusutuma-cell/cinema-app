@@ -5,27 +5,39 @@ import GenreFilter from '../components/ui/GenreFilter'
 import SortSelect from '../components/ui/SortSelect'
 import MovieCard from '../components/movie/MovieCard'
 import SkeletonCard from '../components/movie/SkeletonCard'
+import YearRangeFilter from '../components/ui/YearRangeFilter'
 
 function Browse() {
   const [selectedGenre, setSelectedGenre] = useState(null)
   const [sortBy, setSortBy] = useState('popularity.desc')
+  const [fromYear, setFromYear] = useState('')
+  const [toYear, setToYear] = useState('')
 
-  const genres = useGenres()
+   const genres = useGenres('movie')
 
-  const params = `&sort_by=${sortBy}${selectedGenre ? `&with_genres=${selectedGenre}` : ''}`
-  const { items: movies, loading, error, sentinelRef, hasMore } = useInfiniteScroll(
-    '/discover/movie',
-    params
-  )
+ const params = `&sort_by=${sortBy}${selectedGenre ? `&with_genres=${selectedGenre}` : ''}${
+  fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ''
+}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ''}`
+
+const { items: movies, loading, error, sentinelRef, hasMore } = useInfiniteScroll(
+  '/discover/movie',params)
 
   return (
     <div className="min-h-screen bg-cinema-bg text-white px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="font-display text-4xl text-cinema-gold mb-6">Browse Movies</h1>
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-        <GenreFilter genres={genres} selectedGenre={selectedGenre} onSelect={setSelectedGenre} />
-        <SortSelect value={sortBy} onChange={setSortBy} />
-      </div>
+  <GenreFilter genres={genres} selectedGenre={selectedGenre} onSelect={setSelectedGenre} />
+  <div className="flex flex-col sm:flex-row items-center gap-3">
+    <YearRangeFilter
+      fromYear={fromYear}
+      toYear={toYear}
+      onFromChange={setFromYear}
+      onToChange={setToYear}
+    />
+    <SortSelect value={sortBy} onChange={setSortBy} />
+  </div>
+</div>
 
       {error && <p className="text-cinema-red mb-4">Error: {error}</p>}
 
