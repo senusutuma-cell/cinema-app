@@ -5,6 +5,8 @@ import Series from './pages/Series'
 import SeriesDetail from './pages/SeriesDetail'
 import Navbar from './components/layout/Navbar'
 import Toast from './components/ui/Toast'
+import Celebrities from './pages/Celebrities'
+import CelebrityDetail from './pages/CelebrityDetail'
 import Home from './pages/Home'
 import Browse from './pages/Browse'
 import MovieDetail from './pages/MovieDetail'
@@ -23,6 +25,8 @@ function AppContent() {
       <Routes>
         <Route path="/series" element={<Series />} />
         <Route path="/series/:id" element={<SeriesDetail />} />
+        <Route path="/celebrities" element={<Celebrities />} />
+        <Route path="/celebrity/:id" element={<CelebrityDetail />} />
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/movie/:id" element={<MovieDetail />} />

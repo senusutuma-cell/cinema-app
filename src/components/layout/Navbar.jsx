@@ -14,6 +14,7 @@ const watchlistCount = watchlist.length
     { to: '/', label: 'Home' },
     { to: '/browse', label: 'Movies' },
     { to: '/series', label: 'Series' },
+    { to: '/celebrities', label: 'Celebrities' },
     { to: '/search', label: 'Search' },
   ]
 
