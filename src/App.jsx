@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { WatchlistProvider } from './context/WatchlistContext'
 import { useWatchlist } from './hooks/useWatchlist'
+import Series from './pages/Series'
+import SeriesDetail from './pages/SeriesDetail'
 import Navbar from './components/layout/Navbar'
 import Toast from './components/ui/Toast'
 import Home from './pages/Home'
@@ -19,6 +21,8 @@ function AppContent() {
     <BrowserRouter>
       <Navbar />
       <Routes>
+        <Route path="/series" element={<Series />} />
+        <Route path="/series/:id" element={<SeriesDetail />} />
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/movie/:id" element={<MovieDetail />} />

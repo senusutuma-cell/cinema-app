@@ -13,6 +13,7 @@ const watchlistCount = watchlist.length
   const links = [
     { to: '/', label: 'Home' },
     { to: '/browse', label: 'Movies' },
+    { to: '/series', label: 'Series' },
     { to: '/search', label: 'Search' },
   ]
 

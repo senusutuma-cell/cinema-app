@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Heart, Plus, Star } from 'lucide-react'
 import { useWatchlist } from '../../hooks/useWatchlist'
 
-function MovieCard({ movie }) {
+function MovieCard({ movie ,type = 'movie' }) {
   const posterUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : 'https://placehold.co/500x750/1c1c28/8a8a9a?text=No+Image'
@@ -21,9 +21,9 @@ function MovieCard({ movie }) {
 
   return (
     <Link
-      to={`/movie/${movie.id}`}
-      className="group relative shrink-0 w-40 sm:w-50 rounded-lg overflow-hidden bg-cinema-card hover:scale-105 transition-transform duration-200"
-    >
+  to={`/${type === 'tv' ? 'series' : 'movie'}/${movie.id}`}
+  className="group relative shrink-0 w-40 sm:w-50 rounded-lg overflow-hidden bg-cinema-card hover:scale-105 transition-transform duration-200"
+>
       {/* Poster image */}
       <img
         src={posterUrl}
