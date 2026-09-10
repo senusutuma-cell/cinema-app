@@ -1,12 +1,31 @@
 @import "tailwindcss";
 
+:root {
+  --bg-base: #0a0a0f;
+  --surface-base: #16161f;
+  --card-base: #1c1c28;
+  --muted-base: #8a8a9a;
+  --text-base: #ffffff;
+}
+
+.light,
+html.light {
+  --bg-base: #f4f4f6;
+  --surface-base: #ffffff;
+  --card-base: #ececef;
+  --muted-base: #55555f;
+  --text-base: #0a0a0f;
+}
+
 @theme {
-  --color-cinema-bg: #0a0a0f;
-  --color-cinema-surface: #16161f;
-  --color-cinema-card: #1c1c28;
+  --color-cinema-bg: var(--bg-base);
+  --color-cinema-surface: var(--surface-base);
+  --color-cinema-card: var(--card-base);
   --color-cinema-red: #e50914;
   --color-cinema-red-hover: #f6121d;
   --color-cinema-gold: #f5c518;
-  --color-cinema-muted: #8a8a9a;
+  --color-cinema-muted: var(--muted-base);
+  --color-cinema-text: var(--text-base);
+
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
 }

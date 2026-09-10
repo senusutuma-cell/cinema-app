@@ -11,7 +11,7 @@ function HeroBanner() {
   }
 
   return (
-    <div className="relative w-full h-[70vh] text-white">
+    <div className="relative w-full h-[70vh] text-cinema-text">
       {/* Backdrop image */}
       <img
         src={`https://image.tmdb.org/t/p/original${featured.backdrop_path}`}

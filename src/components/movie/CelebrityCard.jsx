@@ -23,7 +23,7 @@ function CelebrityCard({ person }) {
         loading="lazy"
       />
       <div className="p-2">
-        <p className="text-sm text-white font-medium truncate">{person.name}</p>
+        <p className="text-sm text-cinema-text font-medium truncate">{person.name}</p>
         {knownFor && (
           <p className="text-xs text-cinema-muted truncate">{knownFor}</p>
         )}

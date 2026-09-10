@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, Search, Bookmark, Film } from 'lucide-react'
 import { useWatchlist } from '../../hooks/useWatchlist'
+import { Sun, Moon } from 'lucide-react'
+import { useTheme } from '../../hooks/useTheme'
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -9,6 +11,7 @@ function Navbar() {
  
 const { watchlist } = useWatchlist()
 const watchlistCount = watchlist.length
+const { theme, toggleTheme } = useTheme()
 
   const links = [
     { to: '/', label: 'Home' },
@@ -37,7 +40,7 @@ const watchlistCount = watchlist.length
                 to={link.to}
                 className={({ isActive }) =>
                   `text-sm font-medium transition-colors ${
-                    isActive ? 'text-cinema-gold' : 'text-cinema-muted hover:text-white'
+                    isActive ? 'text-cinema-gold' : 'text-cinema-muted hover:text-cinema-text'
                   }`
                 }
               >
@@ -47,24 +50,27 @@ const watchlistCount = watchlist.length
           </nav>
 
           {/* Right side: search icon + watchlist badge */}
-          <div className="hidden md:flex items-center gap-6">
-            <Link to="/search" className="text-cinema-muted hover:text-white transition-colors">
-              <Search size={20} />
-            </Link>
-            <Link to="/watchlist" className="relative text-cinema-muted hover:text-white transition-colors">
-              <Bookmark size={20} />
-              {watchlistCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-cinema-red text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  {watchlistCount}
-                </span>
-              )}
-            </Link>
-          </div>
+         <div className="hidden md:flex items-center gap-6">
+  <button onClick={toggleTheme} className="text-cinema-muted hover:text-cinema-text transition-colors" aria-label="Toggle theme">
+    {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+  </button>
+  <Link to="/search" className="text-cinema-muted hover:text-cinema-text transition-colors">
+    <Search size={20} />
+  </Link>
+  <Link to="/watchlist" className="relative text-cinema-muted hover:text-cinema-text transition-colors">
+    <Bookmark size={20} />
+    {watchlistCount > 0 && (
+      <span className="absolute -top-2 -right-2 bg-cinema-red text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+        {watchlistCount}
+      </span>
+    )}
+  </Link>
+</div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="md:hidden text-white"
+            className="md:hidden text-cinema-text"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={26} /> : <Menu size={26} />}

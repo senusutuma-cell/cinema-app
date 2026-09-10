@@ -35,7 +35,7 @@ function MovieCard({ movie ,type = 'movie' }) {
       {/* Rating badge  */}
       <div className="absolute top-2 left-2 z-20 bg-black/70 backdrop-blur-sm rounded-md px-2 py-0.5 flex items-center gap-1">
         <Star size={12} className="text-cinema-gold" fill="currentColor" />
-        <span className="text-xs text-white font-medium">{rating}</span>
+        <span className="text-xs text-cinema-text font-medium">{rating}</span>
       </div>
 
       {/* Heart/bookmark */}
@@ -44,13 +44,13 @@ function MovieCard({ movie ,type = 'movie' }) {
   className="absolute top-2 right-2 z-20 bg-black/70 backdrop-blur-sm rounded-full p-1.5 hover:bg-cinema-red transition-colors"
   aria-label="Toggle watchlist"
 >
-        <Heart size={14} className={inWatchlist ? 'fill-cinema-red text-cinema-red' : 'text-white'} />
+        <Heart size={14} className={inWatchlist ? 'fill-cinema-red text-cinema-red' : 'text-cinema-text'} />
       </button>
 
 
       {/* Hover overlay */}
       <div className="absolute inset-0 z-10 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 flex flex-col justify-end p-3">
-        <p className="text-white text-sm font-semibold truncate">{movie.title || movie.name}</p>
+        <p className="text-cinema-text text-sm font-semibold truncate">{movie.title || movie.name}</p>
         <p className="text-cinema-muted text-xs mb-2">{year}</p>
         <button
           onClick={handleToggle}
@@ -61,7 +61,7 @@ function MovieCard({ movie ,type = 'movie' }) {
       </div>
 
       {/* Title shown below poster when NOT hovering  */}
-      <p className="text-xs text-white p-2 truncate group-hover:opacity-0 transition-opacity">
+      <p className="text-xs text-cinema-text p-2 truncate group-hover:opacity-0 transition-opacity">
         {movie.title || movie.name}
       </p>
     </Link>

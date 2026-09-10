@@ -68,7 +68,7 @@ function CelebrityDetail() {
   }
 
   return (
-    <div className="bg-cinema-bg min-h-screen text-white px-4 sm:px-10 py-10">
+    <div className="bg-cinema-bg min-h-screen text-cinema-text px-4 sm:px-10 py-10">
       <div className="flex flex-col sm:flex-row gap-8 max-w-5xl mx-auto mb-10">
         <img
           src={

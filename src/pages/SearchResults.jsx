@@ -61,7 +61,7 @@ function SearchResults() {
     activeFilter === 'all' ? results : results.filter((r) => r.media_type === activeFilter)
 
   return (
-    <div className="min-h-screen bg-cinema-bg text-white px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-cinema-bg text-cinema-text px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="font-display text-4xl text-cinema-gold mb-6 text-center">Search</h1>
 
       <SearchInput value={query} onChange={setQuery} />
@@ -75,7 +75,7 @@ function SearchResults() {
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 activeFilter === f.value
                   ? 'bg-cinema-gold text-black'
-                  : 'bg-cinema-surface text-cinema-muted hover:text-white'
+                  : 'bg-cinema-surface text-cinema-muted hover:text-cinema-text'
               }`}
             >
               {f.label}

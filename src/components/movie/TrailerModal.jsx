@@ -30,7 +30,7 @@ function TrailerModal({ videoKey, onClose }) {
       >
         <button
           onClick={onClose}
-          className="absolute -top-10 right-0 text-white hover:text-cinema-gold transition-colors"
+          className="absolute -top-10 right-0 text-cinema-text hover:text-cinema-gold transition-colors"
           aria-label="Close trailer"
         >
           <X size={28} />

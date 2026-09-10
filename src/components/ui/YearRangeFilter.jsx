@@ -10,7 +10,7 @@ function YearRangeFilter({ fromYear, toYear, onFromChange, onToChange }) {
         onChange={(e) => onFromChange(e.target.value)}
         min="1900"
         max={currentYear}
-        className="w-24 bg-cinema-surface text-white px-3 py-2 rounded-md border border-white/10 focus:outline-none focus:ring-2 focus:ring-cinema-gold placeholder:text-cinema-muted"
+        className="w-24 bg-cinema-surface text-cinema-text px-3 py-2 rounded-md border border-white/10 focus:outline-none focus:ring-2 focus:ring-cinema-gold placeholder:text-cinema-muted"
       />
       <span className="text-cinema-muted">to</span>
       <input
@@ -20,7 +20,7 @@ function YearRangeFilter({ fromYear, toYear, onFromChange, onToChange }) {
         onChange={(e) => onToChange(e.target.value)}
         min="1900"
         max={currentYear}
-        className="w-24 bg-cinema-surface text-white px-3 py-2 rounded-md border border-white/10 focus:outline-none focus:ring-2 focus:ring-cinema-gold placeholder:text-cinema-muted"
+        className="w-24 bg-cinema-surface text-cinema-text px-3 py-2 rounded-md border border-white/10 focus:outline-none focus:ring-2 focus:ring-cinema-gold placeholder:text-cinema-muted"
       />
     </div>
   )

@@ -5,7 +5,7 @@ function Toast({ message, type = 'success' }) {
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-100 animate-in">
-      <div className="flex items-center gap-2 bg-cinema-surface border border-white/10 text-white px-5 py-3 rounded-full shadow-2xl">
+      <div className="flex items-center gap-2 bg-cinema-surface border border-white/10 text-cinema-text px-5 py-3 rounded-full shadow-2xl">
         {type === 'success' ? (
           <CheckCircle size={18} className="text-cinema-gold" />
         ) : (

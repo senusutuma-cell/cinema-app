@@ -6,7 +6,7 @@ function GenreFilter({ genres, selectedGenre, onSelect }) {
         className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
           selectedGenre === null
             ? 'bg-cinema-gold text-black'
-            : 'bg-cinema-surface text-cinema-muted hover:text-white'
+            : 'bg-cinema-surface text-cinema-muted hover:text-cinema-text'
         }`}
       >
         All
@@ -18,7 +18,7 @@ function GenreFilter({ genres, selectedGenre, onSelect }) {
           className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
             selectedGenre === genre.id
               ? 'bg-cinema-gold text-black'
-              : 'bg-cinema-surface text-cinema-muted hover:text-white'
+              : 'bg-cinema-surface text-cinema-muted hover:text-cinema-text'
           }`}
         >
           {genre.name}

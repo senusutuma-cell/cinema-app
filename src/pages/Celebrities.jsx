@@ -6,7 +6,7 @@ function Celebrities() {
   const { data: people, loading, error } = useMovies('/person/popular')
 
   return (
-    <div className="min-h-screen bg-cinema-bg text-white px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-cinema-bg text-cinema-text px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="font-display text-4xl text-cinema-gold mb-6">Celebrities</h1>
 
       {error && <p className="text-cinema-red mb-4">Error: {error}</p>}

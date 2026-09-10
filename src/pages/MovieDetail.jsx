@@ -84,7 +84,7 @@ function MovieDetail() {
   const inWatchlist = isInWatchlist(movie.id)
 
   return (
-    <div className="bg-cinema-bg min-h-screen text-white">
+    <div className="bg-cinema-bg min-h-screen text-cinema-text">
       <div className="relative w-full h-[60vh]">
         <img
           src={

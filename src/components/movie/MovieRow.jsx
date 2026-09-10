@@ -24,14 +24,14 @@ function MovieRow({ title, endpoint }) {
 
   return (
     <section className="py-6 group/row relative">
-      <h2 className="font-display text-2xl text-white px-4 sm:px-6 lg:px-8 mb-4 tracking-wide">
+      <h2 className="font-display text-2xl text-cinema-text px-4 sm:px-6 lg:px-8 mb-4 tracking-wide">
         {title}
       </h2>
 
       {/* Scroll buttons  */}
       <button
         onClick={() => scroll('left')}
-        className="hidden sm:flex opacity-0 group-hover/row:opacity-100 transition-opacity absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-white h-full w-12 items-center justify-center"
+        className="hidden sm:flex opacity-0 group-hover/row:opacity-100 transition-opacity absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-cinema-text h-full w-12 items-center justify-center"
         aria-label="Scroll left"
       >
         <ChevronLeft size={28} />
@@ -48,7 +48,7 @@ function MovieRow({ title, endpoint }) {
 
       <button
         onClick={() => scroll('right')}
-        className="hidden sm:flex opacity-0 group-hover/row:opacity-100 transition-opacity absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-white h-full w-12 items-center justify-center"
+        className="hidden sm:flex opacity-0 group-hover/row:opacity-100 transition-opacity absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-cinema-text h-full w-12 items-center justify-center"
         aria-label="Scroll right"
       >
         <ChevronRight size={28} />

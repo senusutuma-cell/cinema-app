@@ -7,6 +7,7 @@ import Navbar from './components/layout/Navbar'
 import Toast from './components/ui/Toast'
 import Celebrities from './pages/Celebrities'
 import CelebrityDetail from './pages/CelebrityDetail'
+import { ThemeProvider } from './context/ThemeContext'
 import Home from './pages/Home'
 import Browse from './pages/Browse'
 import MovieDetail from './pages/MovieDetail'
@@ -21,6 +22,7 @@ function AppContent() {
   return (
     
     <BrowserRouter>
+   <div className="bg-cinema-bg text-cinema-text min-h-screen transition-colors duration-200"> 
       <Navbar />
       <Routes>
         <Route path="/series" element={<Series />} />
@@ -35,14 +37,17 @@ function AppContent() {
         <Route path="*" element={<NotFound />} />
       </Routes>
      <Toast message={toastMessage} />
+     </div>
     </BrowserRouter>
   )
 }
 function App() {
   return (
+    <ThemeProvider>
     <WatchlistProvider>
       <AppContent />
     </WatchlistProvider>
+    </ThemeProvider>
   )
 }
 

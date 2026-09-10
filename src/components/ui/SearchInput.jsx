@@ -9,7 +9,7 @@ function SearchInput({ value, onChange }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search movies..."
-        className="w-full bg-cinema-surface text-white pl-12 pr-4 py-3 rounded-full border border-white/10 focus:outline-none focus:ring-2 focus:ring-cinema-gold placeholder:text-cinema-muted"
+        className="w-full bg-cinema-surface text-cinema-text pl-12 pr-4 py-3 rounded-full border border-white/10 focus:outline-none focus:ring-2 focus:ring-cinema-gold placeholder:text-cinema-muted"
         autoFocus
       />
     </div>
