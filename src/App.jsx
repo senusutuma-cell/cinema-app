@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, } from 'react-router-dom'
+ import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { WatchlistProvider } from './context/WatchlistContext'
 import { useWatchlist } from './hooks/useWatchlist'
 import Series from './pages/Series'
@@ -51,4 +51,4 @@ function App() {
   )
 }
 
-export default App
+export default App 
