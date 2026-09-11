@@ -69,16 +69,16 @@ function CelebrityDetail() {
 
   return (
     <div className="bg-cinema-bg min-h-screen text-cinema-text px-4 sm:px-10 py-10">
-      <div className="flex flex-col sm:flex-row gap-8 max-w-5xl mx-auto mb-10">
-        <img
-          src={
-            person.profile_path
-              ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
-              : 'https://placehold.co/300x450/1c1c28/8a8a9a?text=No+Photo'
-          }
-          alt={person.name}
-          className="w-48 rounded-lg shadow-2xl mx-auto sm:mx-0"
-        />
+      <div className="flex flex-col sm:flex-row sm:items-start gap-8 max-w-5xl mx-auto mb-10">
+  <img
+    src={
+      person.profile_path
+        ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
+        : 'https://placehold.co/300x450/1c1c28/8a8a9a?text=No+Photo'
+    }
+    alt={person.name}
+    className="w-48 aspect-[2/3] object-cover rounded-lg shadow-2xl mx-auto sm:mx-0 shrink-0"
+  />
         <div>
           <h1 className="font-display text-4xl sm:text-5xl tracking-wide mb-3">
             {person.name}

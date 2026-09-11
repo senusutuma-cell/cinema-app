@@ -93,9 +93,16 @@ const { theme, toggleTheme } = useTheme()
               {link.label}
             </NavLink>
           ))}
-          <Link to="/watchlist" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-cinema-muted flex items-center gap-2">
+                   <Link to="/watchlist" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-cinema-muted flex items-center gap-2">
             <Bookmark size={16} /> Watchlist ({watchlistCount})
           </Link>
+          <button
+            onClick={() => { toggleTheme(); setMobileOpen(false) }}
+            className="text-sm font-medium text-cinema-muted flex items-center gap-2"
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+          </button>
         </nav>
       )}
     </header>
