@@ -154,21 +154,27 @@ function SeriesDetail() {
         <div className="px-6 sm:px-10 py-6">
           <h2 className="text-xl font-semibold mb-4">Cast</h2>
           <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
-            {cast.map((person) => (
-              <div key={person.id} className="shrink-0 w-28 text-center">
-                <img
-                  src={
-                    person.profile_path
-                      ? `https://image.tmdb.org/t/p/w185${person.profile_path}`
-                      : 'https://placehold.co/185x278/1c1c28/8a8a9a?text=No+Photo'
-                  }
-                  alt={person.name}
-                  className="w-28 h-28 rounded-full object-cover mx-auto mb-2"
-                />
-                <p className="text-xs font-medium truncate">{person.name}</p>
-                <p className="text-xs text-cinema-muted truncate">{person.character}</p>
-              </div>
-            ))}
+           {cast.map((person) => (
+  <Link
+    key={person.id}
+    to={`/celebrity/${person.id}`}
+    className="shrink-0 w-28 text-center group"
+  >
+    <img
+      src={
+        person.profile_path
+          ? `https://image.tmdb.org/t/p/w185${person.profile_path}`
+          : 'https://placehold.co/185x278/1c1c28/8a8a9a?text=No+Photo'
+      }
+      alt={person.name}
+      className="w-28 h-28 rounded-full object-cover mx-auto mb-2 group-hover:ring-2 group-hover:ring-cinema-gold transition-all"
+    />
+    <p className="text-xs font-medium truncate group-hover:text-cinema-gold transition-colors">
+      {person.name}
+    </p>
+    <p className="text-xs text-cinema-muted truncate">{person.character}</p>
+  </Link>
+))}
           </div>
         </div>
       )}
