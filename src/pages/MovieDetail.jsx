@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import TrailerModal from '../components/movie/TrailerModal'
+import SkeletonCard from '../components/movie/SkeletonCard'
 import { Star, Play, Heart } from 'lucide-react'
 import { useWatchlist } from '../hooks/useWatchlist'
 
@@ -51,11 +51,16 @@ function MovieDetail() {
         setTrailerKey(trailer ? trailer.key : null)
 
         setSimilar(similarData.results?.slice(0, 10) || [])
-      } catch (err) {
-        if (err.name !== 'AbortError') setError(err.message)
-      } finally {
-        setLoading(false)
-      }
+     } catch (err) {
+  if (err.name !== 'AbortError') {
+    setError(err.message)
+    setLoading(false)
+  }
+} finally {
+  if (!controller.signal.aborted) {
+    setLoading(false)
+  }
+}
     }
 
     fetchAll()
@@ -64,8 +69,20 @@ function MovieDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-cinema-bg flex items-center justify-center text-cinema-muted">
-        Loading...
+     <div className="max-w-7xl mx-auto px-6 py-10 space-y-8 animate-pulse">
+        <div className="w-full h-[60vh] bg-cinema-surface/50 rounded-2xl" />
+        <div className="space-y-4 max-w-3xl">
+          <div className="h-8 bg-cinema-surface/50 rounded w-1/3" />
+          <div className="h-20 bg-cinema-surface/50 rounded w-full" />
+        </div>
+        <div className="space-y-4">
+          <div className="h-6 bg-cinema-surface/50 rounded w-1/6" />
+          <div className="flex gap-4 overflow-hidden">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
+        </div>
       </div>
     )
   }
@@ -84,7 +101,7 @@ function MovieDetail() {
   const inWatchlist = isInWatchlist(movie.id)
 
   return (
-    <div className="bg-cinema-bg min-h-screen text-cinema-text">
+    <div className="text-cinema-text">
       <div className="relative w-full h-[60vh]">
         <img
           src={
@@ -202,9 +219,7 @@ function MovieDetail() {
                 <p className="text-xs p-2 truncate">{m.title}</p>
               </Link>
             ))}
-            {showTrailer && (
-        <TrailerModal videoKey={trailerKey} onClose={() => setShowTrailer(false)} />
-      )}
+           
           </div>
         </div>
       )}

@@ -37,11 +37,16 @@ function CelebrityDetail() {
           .sort((a, b) => b.popularity - a.popularity)
           .slice(0, 12)
         setCredits(sortedCredits)
-      } catch (err) {
-        if (err.name !== 'AbortError') setError(err.message)
-      } finally {
-        setLoading(false)
-      }
+     } catch (err) {
+  if (err.name !== 'AbortError') {
+    setError(err.message)
+    setLoading(false)
+  }
+} finally {
+  if (!controller.signal.aborted) {
+    setLoading(false)
+  }
+}
     }
 
     fetchAll()

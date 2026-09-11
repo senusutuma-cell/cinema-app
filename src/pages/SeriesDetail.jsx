@@ -50,11 +50,16 @@ function SeriesDetail() {
         setTrailerKey(trailer ? trailer.key : null)
 
         setSimilar(similarData.results?.slice(0, 10) || [])
-      } catch (err) {
-        if (err.name !== 'AbortError') setError(err.message)
-      } finally {
-        setLoading(false)
-      }
+     } catch (err) {
+  if (err.name !== 'AbortError') {
+    setError(err.message)
+    setLoading(false)
+  }
+} finally {
+  if (!controller.signal.aborted) {
+    setLoading(false)
+  }
+}
     }
 
     fetchAll()

@@ -4,6 +4,8 @@ import { useWatchlist } from './hooks/useWatchlist'
 import Series from './pages/Series'
 import SeriesDetail from './pages/SeriesDetail'
 import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import PageLoader from './components/layout/PageLoader'
 import Toast from './components/ui/Toast'
 import Celebrities from './pages/Celebrities'
 import CelebrityDetail from './pages/CelebrityDetail'
@@ -23,6 +25,7 @@ function AppContent() {
     
     <BrowserRouter>
    <div className="bg-cinema-bg text-cinema-text min-h-screen transition-colors duration-200"> 
+     <PageLoader />
       <Navbar />
       <Routes>
         <Route path="/series" element={<Series />} />
@@ -36,6 +39,7 @@ function AppContent() {
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
      <Toast message={toastMessage} />
      </div>
     </BrowserRouter>
