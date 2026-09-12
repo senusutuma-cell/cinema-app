@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import SkeletonCard from '../components/movie/SkeletonCard'
 import { Star, Play, Heart } from 'lucide-react'
 import { useWatchlist } from '../hooks/useWatchlist'
+import TrailerModal from '../components/movie/TrailerModal'
 
 const API_KEY = import.meta.env.VITE_TMDB_KEY
 const BASE_URL = 'https://api.themoviedb.org/3'
@@ -223,8 +224,12 @@ function MovieDetail() {
           </div>
         </div>
       )}
+          
+           {showTrailer && (
+        <TrailerModal videoKey={trailerKey} onClose={() => setShowTrailer(false)} />
+      )}
     </div>
   )
-}
+} 
 
 export default MovieDetail
